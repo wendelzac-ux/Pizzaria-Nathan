@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pizzaria Dom Nathan</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Sans:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e4261b;--cream:#f6eedc;--ink:#151210;--lime:#b8f02a;--bg:#f6eedc;--fg:#151210;--card:#fffaf0;--line:#151210;
+--d:'Anton','Impact','Arial Narrow',sans-serif;--b:'DM Sans',system-ui,sans-serif;--s:'Pacifico','Brush Script MT',cursive;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151210;--fg:#f6eedc;--card:#211c18;--line:#f6eedc}}
+:root[data-theme="dark"]{--bg:#151210;--fg:#f6eedc;--card:#211c18;--line:#f6eedc}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--b)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.chk{height:22px;background:repeating-conic-gradient(var(--red) 0 25%,#fff 0 50%) 0 0/22px 22px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--ink);color:var(--cream);display:flex;align-items:center;gap:18px;padding:10px 20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:22px/1 var(--d);letter-spacing:.02em}
+.brand svg{width:40px;height:40px}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav a{text-decoration:none;padding:8px 12px;border-radius:99px;font-weight:700;font-size:14px}
+nav a.on{background:var(--lime);color:var(--ink)}
+nav a.cta{background:var(--red);color:#fff}
+main{max-width:1040px;margin:0 auto;padding:28px 20px 56px}
+section{display:none}section.on{display:block}
+h1,h2,h3{font-family:var(--d);font-weight:400;text-transform:uppercase;line-height:.95;margin:0 0 .4em}
+h1{font-size:clamp(46px,9vw,96px)}h2{font-size:clamp(32px,5vw,52px)}h3{font-size:24px}
+.script{font-family:var(--s);color:var(--red);text-transform:none}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;background:var(--red);color:#fff;border:3px solid var(--ink);border-radius:24px;padding:34px;position:relative;overflow:hidden}
+.hero p{max-width:34ch;font-size:18px}
+.hero .big{background:var(--ink);border-radius:20px;padding:26px;display:grid;place-items:center;position:relative}
+.hero .big svg{width:min(240px,60%)}
+.star{position:absolute;width:46px;height:46px;background:var(--lime);clip-path:polygon(50% 0,61% 28%,92% 20%,72% 45%,100% 62%,66% 66%,62% 100%,45% 72%,12% 92%,26% 58%,0 38%,34% 34%)}
+.btn{display:inline-block;border:3px solid var(--ink);background:var(--lime);color:var(--ink);font:700 16px var(--b);padding:12px 22px;border-radius:99px;text-decoration:none;cursor:pointer;box-shadow:4px 4px 0 var(--ink)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.btn.k{background:var(--ink);color:var(--cream);border-color:var(--cream);box-shadow:4px 4px 0 var(--red)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.card{background:var(--card);border:3px solid var(--line);border-radius:18px;padding:20px}
+.card.l{background:var(--lime);color:var(--ink);border-color:var(--ink)}
+.card.d{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.price{font:28px var(--d);color:var(--red)}
+.gap{margin-top:40px}
+.tag{display:inline-block;font:700 13px var(--b);background:var(--ink);color:var(--lime);border-radius:99px;padding:3px 12px}
+.menu li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:14px 0;border-bottom:2px dashed var(--line);list-style:none}
+.menu ul{margin:0;padding:0}.menu small{display:block;opacity:.75}
+.sz{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.sz div{background:var(--lime);color:var(--ink);border:3px solid var(--ink);border-radius:16px;padding:14px;text-align:center}.sz b{font:28px var(--d);text-transform:uppercase;display:block}.sz small{display:block}
+.chip{border:3px solid var(--line);background:var(--card);color:var(--fg);border-radius:99px;padding:8px 14px;font:700 14px var(--b);cursor:pointer;margin:0 6px 8px 0}.chip[aria-pressed=true]{background:var(--lime);color:var(--ink);border-color:var(--ink)}
+.qr{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:2px dashed var(--line)}.qr button{width:34px;height:34px;border-radius:50%;border:3px solid var(--line);background:var(--bg);color:var(--fg);font:700 18px var(--b);cursor:pointer}.qr .n{display:inline-block;min-width:28px;text-align:center;font-weight:700}
+#cb .card{margin-bottom:16px}#cb h3{margin-bottom:12px}#sum{position:sticky;top:90px}#sum ul{padding:0;margin:12px 0;list-style:none}#sum li{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed rgba(246,238,220,.35)}#sum .tt{font:44px var(--d);color:var(--lime)}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px;margin-top:16px}
+.cat .pt{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0 12px}.cat .pt span{background:var(--ink);color:var(--cream);border-radius:10px;padding:6px 4px;text-align:center;font-size:12px}.cat .pt b{display:block;font:20px var(--d);color:var(--lime)}.cat li{display:block;padding:10px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+input,textarea{width:100%;font:16px var(--b);padding:12px 14px;border:3px solid var(--line);border-radius:12px;background:var(--bg);color:var(--fg);margin:6px 0 14px}
+label{font-weight:700;font-size:14px}
+.steps{list-style:none;margin:20px 0 0;padding:0;border-left:4px solid var(--line);margin-left:12px}
+.steps li{position:relative;padding:0 0 22px 28px}
+.steps li::before{content:"";position:absolute;left:-14px;top:2px;width:24px;height:24px;border-radius:50%;border:3px solid var(--line);background:var(--bg)}
+.steps li.ok::before{background:var(--lime);border-color:var(--ink)}
+.steps li.now::before{background:var(--red);border-color:var(--ink)}
+.bar{display:grid;grid-template-columns:60px 1fr 40px;gap:10px;align-items:center;font-size:14px;margin:4px 0}
+.bar i{display:block;height:12px;border-radius:9px;background:rgba(128,128,128,.25);overflow:hidden}.bar b{display:block;height:100%;background:var(--red)}
+.stars{color:var(--red);letter-spacing:2px}
+.rate button{font-size:30px;background:none;border:0;cursor:pointer;color:var(--red);padding:0 2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+footer{background:var(--ink);color:var(--cream);padding:30px 20px;text-align:center}
+footer .script{font-size:26px;color:var(--lime)}
+@media(max-width:760px){.hero,.two{grid-template-columns:1fr}.hero{padding:24px}nav{margin-left:0}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="lg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" fill="#e4261b"/><circle cx="50" cy="50" r="40" fill="#f6eedc"/><circle cx="50" cy="50" r="36" fill="#b8f02a"/><g stroke="#f6eedc" stroke-width="3"><path d="M50 14v72M14 50h72M24.5 24.5l51 51M75.5 24.5l-51 51"/></g><circle cx="50" cy="50" r="7" fill="#f6eedc"/></symbol></svg>
+<div class="chk" aria-hidden="true"></div>
+<header>
+<a class="brand" href="#inicio"><svg><use href="#lg"/></svg>DOM NATHAN</a>
+<nav aria-label="Principal">
+<a href="#inicio" data-n="inicio">Início</a><a href="#cardapio" data-n="cardapio">Cardápio</a><a href="#combo" data-n="combo">Monte seu combo</a><a href="#pedido" data-n="pedido">Acompanhar pedido</a><a href="#avaliacoes" data-n="avaliacoes">Avaliações</a><a class="cta" href="#entrar" data-n="entrar">Entrar</a>
+</nav>
+</header>
+<main>
+
+<section id="inicio">
+<div class="hero">
+<div>
+<span class="tag">Delivery · Oropó · Mogi das Cruzes</span>
+<h1 style="margin-top:14px">Alteza,<br>sua pizza chegou.</h1>
+<p>Pizza de bairro com acabamento premium. Peça pelo site e acompanhe cada etapa até a sua porta.</p>
+<div class="row"><a class="btn" href="#cardapio">Ver cardápio</a><a class="btn k" href="#pedido">Acompanhar pedido</a></div>
+</div>
+<div class="big"><span class="star" style="top:-14px;right:20px"></span><span class="star" style="bottom:-10px;left:16px;background:var(--red);width:34px;height:34px"></span><svg><use href="#lg"/></svg></div>
+</div>
+
+<h2 class="gap">Central do Dom</h2>
+<div class="grid">
+<a class="card l" href="#cardapio" style="text-decoration:none"><h3>Cardápio</h3><p>Das clássicas ao limão-siciliano da casa.</p></a>
+<a class="card" href="#pedido" style="text-decoration:none"><h3>Meu pedido</h3><p>Do forno à sua porta, em tempo real.</p></a>
+<a class="card d" href="#avaliacoes" style="text-decoration:none"><h3>Avaliações</h3><p>O que o pessoal do bairro anda dizendo.</p></a>
+<a class="card" href="#entrar" style="text-decoration:none"><h3>Minha conta</h3><p>Salve seu endereço e peça em dois toques.</p></a>
+</div>
+
+<div class="card d gap" style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+<div><h2 style="margin:0">Bateu fome? <span class="script">Chama o Dom.</span></h2><p style="margin:.4em 0 0">Segura a fatia e bate a foto.</p></div>
+<a class="btn" href="#combo">Montar meu combo</a>
+</div>
+</section>
+
+<section id="cardapio">
+<h1>Cardápio</h1>
+<p>Quatro tamanhos, 30 sabores e preço de bairro. O preço de cada sabor está no topo da categoria.</p>
+<div class="sz gap" style="margin-top:20px">
+<div><b>Broto</b><small>4 fatias · 20 cm</small></div>
+<div><b>Pequena</b><small>6 fatias · 25 cm</small></div>
+<div><b>Média</b><small>8 fatias · 30 cm</small></div>
+<div><b>Grande</b><small>10 fatias · 35 cm</small></div>
+</div>
+<div class="cats">
+<div class="card menu cat"><h3>Tradicionais</h3>
+<div class="pt"><span>Broto<b>R$ 25</b></span><span>Pequena<b>R$ 35</b></span><span>Média<b>R$ 45</b></span><span>Grande<b>R$ 55</b></span></div><ul>
+<li><b>Margherita</b><small>molho, mussarela, tomate, manjericão</small></li>
+<li><b>Mussarela</b><small>molho, mussarela, orégano</small></li>
+<li><b>Calabresa</b><small>calabresa, cebola, azeitona</small></li>
+<li><b>Portuguesa</b><small>presunto, ovo, cebola, ervilha</small></li>
+<li><b>Napolitana</b><small>mussarela, tomate fatiado, parmesão</small></li>
+<li><b>Frango com catupiry</b><small>frango desfiado, catupiry</small></li>
+<li><b>Atum</b><small>atum, cebola, azeitona</small></li>
+<li><b>Toscana</b><small>linguiça toscana, cebola, mussarela</small></li>
+</ul></div>
+<div class="card menu cat"><h3>Especiais</h3>
+<div class="pt"><span>Broto<b>R$ 29</b></span><span>Pequena<b>R$ 39</b></span><span>Média<b>R$ 49</b></span><span>Grande<b>R$ 59</b></span></div><ul>
+<li><b>Quatro queijos</b><small>mussarela, parmesão, provolone, gorgonzola</small></li>
+<li><b>Pepperoni</b><small>pepperoni, mussarela, pimenta calabresa</small></li>
+<li><b>Bacon crocante</b><small>bacon, mussarela, cebola caramelizada</small></li>
+<li><b>Lombo com cream cheese</b><small>lombo canadense, cream cheese</small></li>
+<li><b>Frango, bacon e cheddar</b><small>frango, bacon, cheddar cremoso</small></li>
+<li><b>Escarola com bacon</b><small>escarola refogada, bacon, mussarela</small></li>
+<li><b>Strogonoff de carne</b><small>strogonoff, mussarela, batata palha</small></li>
+<li><b>Carne seca com abóbora</b><small>carne seca, purê de abóbora, catupiry</small></li>
+</ul></div>
+<div class="card menu cat"><h3>Premium</h3>
+<div class="pt"><span>Broto<b>R$ 33</b></span><span>Pequena<b>R$ 45</b></span><span>Média<b>R$ 55</b></span><span>Grande<b>R$ 65</b></span></div><ul>
+<li><b>Limão-siciliano</b><small>especial da casa: mussarela, raspas de limão, manjericão</small></li>
+<li><b>Pizza do Dom</b><small>calabresa artesanal, cebola roxa, mel picante</small></li>
+<li><b>Burrata com tomate confit</b><small>burrata, tomate confit, pesto</small></li>
+<li><b>Parma com rúcula</b><small>presunto parma, rúcula, parmesão lascado</small></li>
+<li><b>Trufada de cogumelos</b><small>funghi, shimeji, azeite trufado</small></li>
+<li><b>Camarão com catupiry</b><small>camarão, catupiry, cebolinha</small></li>
+<li><b>Mortadela com pistache</b><small>mortadela, burrata, pistache</small></li>
+<li><b>Gorgonzola com pera</b><small>gorgonzola, pera, nozes, mel</small></li>
+</ul></div>
+<div class="card menu cat"><h3>Doces</h3>
+<div class="pt"><span>Broto<b>R$ 27</b></span><span>Pequena<b>R$ 37</b></span><span>Média<b>R$ 47</b></span><span>Grande<b>R$ 57</b></span></div><ul>
+<li><b>Chocolate com morango</b><small>chocolate ao leite, morango</small></li>
+<li><b>Banana com canela</b><small>banana, canela, açúcar, leite condensado</small></li>
+<li><b>Romeu e Julieta</b><small>mussarela, goiabada</small></li>
+<li><b>Prestígio</b><small>chocolate, coco ralado</small></li>
+<li><b>Doce de leite com coco</b><small>doce de leite, coco, paçoca</small></li>
+<li><b>Brigadeiro</b><small>brigadeiro cremoso, granulado</small></li>
+</ul></div>
+</div>
+<div class="row gap"><a class="btn k" href="#combo">Montar meu combo</a></div>
+<p><small>Preços e medidas são exemplos para validar com custos e fornecedores.</small></p>
+</section>
+
+<section id="combo">
+<h1>Monte seu <span class="script">combo</span></h1>
+<p>Escolha tamanho, sabor, bebida e extras. O pedido vai pronto para o WhatsApp.</p>
+<div class="two gap" style="margin-top:20px;align-items:start"><div id="cb"></div><aside class="card d" id="sum" aria-live="polite"></aside></div>
+</section>
+
+<section id="pedido">
+<h1>Acompanhe sua <span class="script">pizza</span></h1>
+<p>Digite o número do pedido para ver em que etapa ele está.</p>
+<div class="two gap" style="margin-top:20px">
+<div class="card">
+<label for="pn">Nº do pedido</label><input id="pn" value="#DN-0048">
+<label>Endereço de entrega</label><input value="Rua das Flores, 123 · Oropó" aria-label="Endereço">
+<span class="tag">Em andamento</span>
+<ol class="steps">
+<li class="ok"><b>Pedido recebido</b><br>19h02 · Confirmado pela cozinha.</li>
+<li class="ok"><b>Na massa</b><br>19h08 · Abrindo e montando.</li>
+<li class="now"><b>No forno</b><br>Pronta em cerca de 8 minutos.</li>
+<li><b>Saiu para entrega</b><br>Você recebe um aviso.</li>
+<li><b>Chegou!</b><br>Alteza, sua pizza chegou.</li>
+</ol></div>
+<div class="card d"><h3>Dúvidas?</h3><p>Se precisar de mais informações, fale com a equipe.</p><a class="btn" href="#">Falar no WhatsApp</a>
+<p style="margin-top:28px;opacity:.8">Dom Nathan · Oropó, Mogi das Cruzes</p></div>
+</div>
+</section>
+
+<section id="avaliacoes">
+<h1>Avaliações</h1>
+<p>Veja o que os moradores estão dizendo e conte como foi a sua pizza.</p>
+<div class="two gap" style="margin-top:20px">
+<div>
+<div class="card" style="display:flex;gap:22px;align-items:center;flex-wrap:wrap">
+<div><div class="price" style="font-size:72px;line-height:1">4,6</div><div class="stars">★★★★★</div><small>128 avaliações</small></div>
+<div style="flex:1;min-width:180px">
+<div class="bar">5 estrelas<i><b style="width:72%"></b></i>72%</div><div class="bar">4 estrelas<i><b style="width:18%"></b></i>18%</div><div class="bar">3 estrelas<i><b style="width:6%"></b></i>6%</div><div class="bar">2 estrelas<i><b style="width:3%"></b></i>3%</div><div class="bar">1 estrela<i><b style="width:1%"></b></i>1%</div>
+</div></div>
+<div class="card gap" style="margin-top:16px"><div class="stars">★★★★★</div><h3>Chegou quentinha</h3><p>Pedi pela manhã e já acompanhei tudo pelo site. A borda é outro nível. Voltando sexta!</p><small><b>Mariana S.</b> · Jardim das Oliveiras</small></div>
+<div class="card" style="margin-top:16px"><div class="stars">★★★★☆</div><h3>Vale o preço</h3><p>Pizza de bairro com cara de restaurante. Só faltou o aviso por e-mail.</p><small><b>Carlos E.</b> · Vila Nova</small></div>
+</div>
+<div class="card l"><h3>Deixe sua avaliação</h3>
+<div class="rate" id="rate" aria-label="Sua nota"></div>
+<label for="rn">Seu nome</label><input id="rn" placeholder="Nome completo">
+<label for="rc">Comentário</label><textarea id="rc" rows="4" placeholder="Conte como foi sua pizza..."></textarea>
+<button class="btn k" id="rs">Enviar avaliação</button><p id="rm" role="status" style="font-weight:700"></p></div>
+</div>
+</section>
+
+<section id="entrar">
+<h1>Que bom te ver <span class="script">de novo</span></h1>
+<div class="two gap" style="margin-top:20px;align-items:start">
+<div class="card l"><h2>Login</h2>
+<label for="le">E-mail</label><input id="le" type="email" placeholder="seuemail@exemplo.com">
+<label for="lp">Senha</label><input id="lp" type="password">
+<button class="btn k" id="lg1">Entrar</button>
+<p id="lm" role="status" style="font-weight:700"></p>
+<p>Não tem conta? <a href="#cadastro"><b>Registre-se agora</b></a></p></div>
+<div class="card d"><h2>Primeira vez por aqui?</h2><p>Crie sua conta em menos de um minuto. Seu endereço e seus sabores favoritos ficam salvos para pedir em dois toques.</p><a class="btn" href="#cadastro">Criar minha conta</a></div>
+</div>
+</section>
+
+<section id="cadastro">
+<h1>Entre na <span class="script">família</span></h1>
+<div class="two gap" style="margin-top:20px;align-items:start">
+<div class="card d"><h2>Registre-se</h2>
+<label for="rn2">Nome completo</label><input id="rn2" placeholder="Ex.: João da Silva">
+<label for="rt">Telefone / WhatsApp</label><input id="rt" placeholder="(00) 00000-0000">
+<label for="re">E-mail</label><input id="re" type="email">
+<button class="btn" id="rg1">Criar minha conta</button>
+<p id="rm2" role="status" style="font-weight:700"></p>
+<p>Já tem conta? <a href="#entrar"><b>Entrar</b></a></p></div>
+<div class="card l"><h2>Conta criada, pizza liberada</h2><p>Depois do cadastro, você vai direto para o Monte seu combo.</p><a class="btn k" href="#entrar">Já tenho conta</a></div>
+</div>
+</section>
+
+</main>
+<div class="chk" aria-hidden="true"></div>
+<footer>
+<svg width="44" height="44"><use href="#lg"/></svg>
+<div class="script">Pizza é Dom.</div>
+<p>Oropó · Mogi das Cruzes · (XX) XXXXX-XXXX</p>
+<small>© 2026 Pizzaria Dom Nathan. Todos os direitos reservados.</small>
+</footer>
+<script>
+function go(){var h=(location.hash||"#inicio").slice(1);if(!document.getElementById(h))h="inicio";
+document.querySelectorAll("section").forEach(function(s){s.classList.toggle("on",s.id===h)});
+document.querySelectorAll("nav a[data-n]").forEach(function(a){a.classList.toggle("on",a.dataset.n===(h==="cadastro"?"entrar":h))});window.scrollTo(0,0)}
+addEventListener("hashchange",go);go();
+var n=0,r=document.getElementById("rate");
+for(var i=1;i<=5;i++){(function(i){var b=document.createElement("button");b.textContent="☆";b.setAttribute("aria-label",i+" estrelas");
+b.onclick=function(){n=i;[].forEach.call(r.children,function(x,k){x.textContent=k<i?"★":"☆"})};r.appendChild(b)})(i)}
+document.getElementById("rs").onclick=function(){document.getElementById("rm").textContent=n?"Valeu! Sua avaliação foi enviada.":"Escolha uma nota de 1 a 5 estrelas antes de enviar."};
+var CT=[{n:"Tradicionais",p:[25,35,45,55],f:["Margherita","Mussarela","Calabresa","Portuguesa","Napolitana","Frango com catupiry","Atum","Toscana"]},{n:"Especiais",p:[29,39,49,59],f:["Quatro queijos","Pepperoni","Bacon crocante","Lombo com cream cheese","Frango, bacon e cheddar","Escarola com bacon","Strogonoff de carne","Carne seca com abóbora"]},{n:"Premium",p:[33,45,55,65],f:["Limão-siciliano","Pizza do Dom","Burrata com tomate confit","Parma com rúcula","Trufada de cogumelos","Camarão com catupiry","Mortadela com pistache","Gorgonzola com pera"]},{n:"Doces",p:[27,37,47,57],f:["Chocolate com morango","Banana com canela","Romeu e Julieta","Prestígio","Doce de leite com coco","Brigadeiro"]}];
+var SZ=["Broto","Pequena","Média","Grande"],AD=[["Refri lata",6],["Refri 2 L",14],["Suco 500 ml",8],["Água",4],["Borda recheada",8],["Esfirra de carne",5],["Esfirra de queijo",5],["Esfirra de frango",5]];
+var S={sz:1,ct:0,fl:[],q:AD.map(function(){return 0})};
+function brl(v){return"R$ "+v.toFixed(2).replace(".",",")}
+function chip(a,t,on,d){return'<button class="chip" aria-pressed="'+on+'" data-a="'+a+'" '+d+'>'+t+'</button>'}
+function qr(i){return'<div class="qr"><span>'+AD[i][0]+' <small>'+brl(AD[i][1])+'</small></span><span><button data-a="q" data-i="'+i+'" data-d="-1" aria-label="Tirar '+AD[i][0]+'">−</button><span class="n">'+S.q[i]+'</span><button data-a="q" data-i="'+i+'" data-d="1" aria-label="Adicionar '+AD[i][0]+'">+</button></span></div>'}
+function R(){var h='<div class="card"><h3>1. Tamanho</h3>';
+SZ.forEach(function(z,i){h+=chip("sz",z+" · R$ "+CT[S.ct].p[i],S.sz===i,'data-i="'+i+'"')});
+h+='</div><div class="card"><h3>2. Sabor</h3><p><small>Escolha 1 sabor ou 2 para meio a meio. Vale o preço do mais caro.</small></p>';
+CT.forEach(function(c,i){h+=chip("ct",c.n,S.ct===i,'data-i="'+i+'"')});
+h+='<div style="margin-top:10px">';CT[S.ct].f.forEach(function(f,i){var k=S.ct+":"+i;h+=chip("fl",f,S.fl.indexOf(k)>-1,'data-k="'+k+'"')});
+h+='</div></div><div class="card"><h3>3. Bebidas</h3>';[0,1,2,3].forEach(function(i){h+=qr(i)});
+h+='</div><div class="card"><h3>4. Extras e esfirras</h3>';[4,5,6,7].forEach(function(i){h+=qr(i)});h+='</div>';
+document.getElementById("cb").innerHTML=h;
+var t=0,L=[],tx=[];
+if(S.fl.length){var nm=S.fl.map(function(k){var a=k.split(":");return CT[a[0]].f[a[1]]}),pr=Math.max.apply(null,S.fl.map(function(k){return CT[k.split(":")[0]].p[S.sz]}));t+=pr;var ln="Pizza "+SZ[S.sz]+" ("+nm.join(" + ")+")";L.push([ln,pr]);tx.push("• "+ln+" — "+brl(pr))}
+AD.forEach(function(a,i){if(S.q[i]){var v=a[1]*S.q[i];t+=v;L.push([S.q[i]+"× "+a[0],v]);tx.push("• "+S.q[i]+"× "+a[0]+" — "+brl(v))}});
+var s='<h3>Seu pedido</h3>';
+s+=L.length?'<ul>'+L.map(function(l){return"<li><span>"+l[0]+"</span><b>"+brl(l[1])+"</b></li>"}).join("")+"</ul>":'<p>Escolha um sabor para começar.</p>';
+s+='<div class="tt">'+brl(t)+'</div>';
+if(L.length){var m="Olá, Dom Nathan! Quero pedir:\n"+tx.join("\n")+"\nTotal: "+brl(t);s+='<p><a class="btn" target="_blank" rel="noopener" href="https://wa.me/5511940649557?text='+encodeURIComponent(m)+'">Enviar pelo WhatsApp</a></p>'}
+document.getElementById("sum").innerHTML=s+(U?"":'<p><small>Novo por aqui? <a href="#cadastro" style="color:var(--lime)">Crie sua conta</a> e salve seu endereço.</small></p>')}
+document.getElementById("cb").onclick=function(e){var b=e.target.closest("button");if(!b)return;var a=b.dataset.a;
+if(a==="sz")S.sz=+b.dataset.i;else if(a==="ct")S.ct=+b.dataset.i;
+else if(a==="fl"){var k=b.dataset.k,x=S.fl.indexOf(k);if(x>-1)S.fl.splice(x,1);else{S.fl.push(k);if(S.fl.length>2)S.fl.shift()}}
+else if(a==="q"){var i=+b.dataset.i;S.q[i]=Math.max(0,S.q[i]+ +b.dataset.d)}
+R()};
+var U="";
+function nm(s){return s.trim().split(/[ @]/)[0]}
+function logged(n){U=n;var c=document.querySelector("nav a.cta");c.textContent="Olá, "+n;c.href="#combo";R();location.hash="#combo"}
+document.getElementById("lg1").onclick=function(){var e=document.getElementById("le").value.trim(),m=document.getElementById("lm");if(!e||!document.getElementById("lp").value){m.textContent="Preencha e-mail e senha para entrar.";return}logged(nm(e))};
+document.getElementById("rg1").onclick=function(){var n=document.getElementById("rn2").value,t=document.getElementById("rt").value,e=document.getElementById("re").value,m=document.getElementById("rm2");if(!n.trim()||!t.trim()||!e.trim()){m.textContent="Preencha nome, WhatsApp e e-mail para criar a conta.";return}logged(nm(n))};
+R();
+</script>
+</body>
+</html>
